@@ -1,0 +1,17 @@
+maslow:
+  build: ../maslow-standalone
+  command: ./run.sh
+  volumes:
+    - ../maslow-standalone:/code
+  links:
+    - postgres
+  ports:
+    - "3000:3000"
+  environment:
+    INSTANCE_NAME: maslow-docker
+    MASLOW_HOST: xgs-maslow.local
+postgres:
+  image: postgres:9.4
+  environment:
+    POSTGRES_PASSWORD: maslow
+    POSTGRES_USER: maslow
