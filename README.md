@@ -10,7 +10,9 @@ This development environment eliminates the need for more than one dependency (e
 
 3. In the checkout directory of this repo, run the Docker script without any arguments, which will default it to bring the environment up.
 
+    ```
     ./docker.sh
+    ```
 
 4. Create the database, otherwise - when loading the app in a browser - you will see this error:
 
@@ -20,6 +22,8 @@ This development environment eliminates the need for more than one dependency (e
 
 5. If you wish to create a user account for testing, run this command, replacing the name etc with your details:
 
-    ./docker.sh run maslow bin/rake users\:create_first_user\["juan","juan.uys@digital.cabinet-office.gov.uk","yoursuperrandompassphrase"\]
 
+    ```
+    ./docker.sh run maslow bin/rake users\:create_first_user\["juan","email@example.org","yoursuperrandompassphrase"\]
+    ```
 
