@@ -1,6 +1,6 @@
 maslow:
   build: ../maslow-standalone
-  command: ./run.sh
+  command: bin/rails server -e development --port 3000 --binding 0.0.0.0
   volumes:
     - ../maslow-standalone:/code
   links:
