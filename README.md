@@ -50,3 +50,27 @@ Note, when cloning [cgt](https://github.com/crossgovernmentservices/cgt) and [cg
     ```
     ./docker.sh run maslow bin/rake spec
     ```
+
+# Local NGINX
+
+1. Copy the server definition to your NGINX install, typically:
+
+    ```
+    sudo cp nginx.conf /etc/nginx/sites-available/xgs.local
+    sudo ln -s /etc/nginx/sites-available/xgs.local /etc/nginx/sites-enabled/xgs.local
+    ```
+2. Restart NGINX
+
+    ```
+    sudo service nginx restart
+    ```
+
+3. Add the snippet in [hosts](./hosts) to ```/etc/hosts```.
+
+# App links 
+
+| App | URL | without NGINX proxy |
+| --- | --- | ------------------- |
+| Maslow | http://maslow.xgs.local | http://localhost:3000 |
+| Cross Government Services | http://xgs.local|http://localhost:3001 |
+| Cross Government Services Prototypes | http://prototypes.xgs.local | http://localhost:3002 |
