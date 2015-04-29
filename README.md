@@ -21,13 +21,6 @@ This development environment eliminates the need for more than one dependency (e
 
 2. Clone this repo, and all apps into a working directory.
 
-Note, when cloning [cgt](https://github.com/crossgovernmentservices/cgt) and [cgt prototypes](https://github.com/crossgovernmentservices/cgt_prototypes), use these directory names:
-
-    ```
-    git clone https://github.com/crossgovernmentservices/cgt xgs
-    git clone https://github.com/crossgovernmentservices/cgt_prototypes xgs_prototypes
-    ```
-
 3. In the checkout directory of this repo, run the Docker script without any arguments, which will default it to bring the environment up.
 
     ```
