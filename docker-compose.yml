@@ -9,23 +9,23 @@ maslow:
     - "3000:3000"
   environment:
     INSTANCE_NAME: maslow-docker
-    MASLOW_HOST: xgs-maslow.local
+    MASLOW_HOST: cgt-maslow.local
 postgres:
   image: postgres:9.4
   environment:
     POSTGRES_PASSWORD: maslow
     POSTGRES_USER: maslow
-xgs:
-  build: ../xgs
+cgt:
+  build: ../cgt
   command: ./docker.sh 
   volumes:
-    - ../xgs:/code
+    - ../cgt:/code
   ports:
    - "3001:3001"
-xgsprototypes:
-  build: ../xgs_prototypes
+cgtprototypes:
+  build: ../cgt_prototypes
   command: ./docker.sh 
   volumes:
-    - ../xgs_prototypes:/code
+    - ../cgt_prototypes:/code
   ports:
    - "3002:3002"
