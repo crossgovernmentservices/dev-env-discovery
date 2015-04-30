@@ -1,8 +1,8 @@
 maslow:
-  build: ../maslow-standalone
+  build: apps/maslow-standalone
   command: bin/rails server -e development --port 3000 --binding 0.0.0.0
   volumes:
-    - ../maslow-standalone:/code
+    - apps/maslow-standalone:/code
   links:
     - postgres
   ports:
@@ -16,16 +16,16 @@ postgres:
     POSTGRES_PASSWORD: maslow
     POSTGRES_USER: maslow
 cgt:
-  build: ../cgt
+  build: apps/cgt
   command: ./docker.sh 
   volumes:
-    - ../cgt:/code
+    - apps/cgt:/code
   ports:
    - "3001:3001"
 cgtprototypes:
-  build: ../cgt_prototypes
+  build: apps/cgt_prototypes
   command: ./docker.sh 
   volumes:
-    - ../cgt_prototypes:/code
+    - apps/cgt_prototypes:/code
   ports:
    - "3002:3002"
