@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+apps=`cat config/apps`
+
+for app in $apps; do
+    _app=$(basename $app)
+    # presumably, if you're not on master, you don't want interference, so
+    #+ only allow refreshes on master
+    BRANCH=$(git -C ./apps/$_app branch | grep "*")
+    if [ "${BRANCH/* /}" == "master" ]; then
+        echo "Refreshing application ${app}"
+        git -C ./apps/$_app pull
+    else
+        echo
+        echo "Skipping $_app -- not on master"
+        echo
+    fi
+done

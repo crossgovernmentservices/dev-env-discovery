@@ -4,11 +4,13 @@ This development environment eliminates the need for more than one dependency (e
 
 # Steps
 
-1. Install [Docker and Compose](https://docs.docker.com/compose/install/) for your architecture (and feel free to try the [simple Python example](https://docs.docker.com/compose/) to gain more hands-on familiarity). Specifically for Mac OSX:
+
+## 1. Install Docker and docker-compose
+
+Install [Docker and Compose](https://docs.docker.com/compose/install/) for your architecture (and feel free to try the [simple Python example](https://docs.docker.com/compose/) to gain more hands-on familiarity). Specifically for Mac OSX:
   1. Install latest boot2docker from https://github.com/boot2docker/osx-installer/releases
   2. Run these commands:
 
-        ```
         boot2docker init
         boot2docker start
         eval "$(boot2docker shellinit)"
@@ -17,53 +19,39 @@ This development environment eliminates the need for more than one dependency (e
         # install docker-compose
         curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
-        ```
 
-2. Clone this repo, and all apps into a working directory.
+## 2. Clone this repo
 
-3. In the checkout directory of this repo, run the Docker script without any arguments, which will default it to bring the environment up.
+    git clone git@github.com:crossgovernmentservices/dev-env.git
 
-    ```
+## 3. Bootstrap
+
+Run bootstrap to pull dependencies
+
+    cd dev-env
+    ./script/bootstrap
+
+## 4. Start the apps 
+
     ./docker.sh
-    ```
-
-## Maslow steps
-
-1. Create the database, otherwise - when loading the app in a browser - you will see this error:
-
-![error no database](https://raw.githubusercontent.com/crossgovernmentservices/dev-env/master/doc/error-no-db.png)
-
-    ./docker.sh run maslow db:setup
-
-2. If you wish to create a user account for testing, run this command, replacing the name etc with your details:
 
 
-    ```
-    ./docker.sh run maslow bin/rake users\:create_first_user\["juan","email@example.org","yoursuperrandompassphrase"\]
-    ```
+## 5. (optional) Set up environment for Docker
 
-## Maslow testing
+If you want to run Docker commands, add the Docker environment variables to your profile:
 
-1. Prepare the Maslow test database:
-
-    ```
-    ./docker.sh run maslow bin/rake db:test:prepare
-    ```
-
-2. Run the tests
-
-
-    ```
-    ./docker.sh run maslow bin/rake spec
-    ```
+    boot2docker shellinit | grep "^export" >> ~/.bash_profile
 
 # Local NGINX
+
+If you'd like to proxy the apps  behind a "nice" name like http://xgs.local instead of the usual http://localhost:3000
 
 1. Copy the server definition to your NGINX install, typically:
 
     ```
     sudo cp nginx.conf /etc/nginx/sites-available/xgs.local
-    sudo ln -s /etc/nginx/sites-available/xgs.local /etc/nginx/sites-enabled/xgs.local
+    sudo ln -s /etc/nginx/sites-available/xgs.local \
+               /etc/nginx/sites-enabled/xgs.local
     ```
 2. Restart NGINX
 

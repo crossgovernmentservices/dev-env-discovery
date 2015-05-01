@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+apps=`cat config/apps`
+
+for app in $apps; do
+  _app=$(basename $app)
+  if [[ ! -d ./apps/$_app ]] ; then
+    echo "Installing: ${app}"
+    git clone git@github.com:$app.git ./apps/$_app
+  else
+    echo "Not updating local copy of ${app}"
+  fi
+done
