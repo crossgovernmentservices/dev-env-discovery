@@ -29,3 +29,13 @@ cgtprototypes:
     - apps/cgt_prototypes:/code
   ports:
    - "3002:3002"
+xgsprototypes:
+  build: apps/xgs_prototypes
+  command: python manage.py server
+  environment:
+    APPLICATION_ENV: dev
+    PORT: 3003
+  volumes:
+    - apps/xgs_prototypes:/code
+  ports:
+    - "3003:3003"
