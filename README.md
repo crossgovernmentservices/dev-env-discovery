@@ -22,6 +22,8 @@ Install [Docker and Compose](https://docs.docker.com/compose/install/) for your 
 
 ## 2. Clone this repo
 
+**Mac users, note that you have to clone this somewhere in your home directory for the default /Users mount in Virtual Box to work.**
+
     git clone git@github.com:crossgovernmentservices/dev-env.git
 
 ## 3. Bootstrap
