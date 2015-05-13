@@ -5,20 +5,33 @@ This development environment eliminates the need for more than one dependency (e
 # Steps
 
 
-## 1. Install Docker and docker-compose
+## Install dependencies
 
-Install [Docker and Compose](https://docs.docker.com/compose/install/) for your architecture (and feel free to try the [simple Python example](https://docs.docker.com/compose/) to gain more hands-on familiarity). Specifically for Mac OSX:
-  1. Install latest boot2docker from https://github.com/boot2docker/osx-installer/releases
-  2. Run these commands:
+Using your platform's package manager (e.g. apt-get or brew), install:
+
+- docker
+- docker-compose
+
+
+On Linux, alternatively install docker-compose with:
+
+    curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+
+### Mac
+
+If you are on a Mac, also install:
+
+- boot2docker
+- [VirtualBox](https://www.virtualbox.org/)
+
+...upon which you need to run these commands:
 
         boot2docker init
         boot2docker start
         eval "$(boot2docker shellinit)"
         # and to test that it all works:
         docker run hello-world
-        # install docker-compose
-        curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-        chmod +x /usr/local/bin/docker-compose
 
 ## 2. Clone this repo
 
