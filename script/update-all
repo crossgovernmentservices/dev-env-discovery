@@ -11,7 +11,10 @@ for app in $apps; do
     BRANCH=$(git -C ./apps/$_app branch | grep "*")
     if [ "${BRANCH/* /}" == "master" ]; then
         echo "Refreshing application ${app}"
-        git -C ./apps/$_app pull
+        pushd ./apps/$_app
+        git pull origin master
+        git submodule update --init --recursive
+        popd
     else
         echo
         echo "Skipping $_app -- not on master"

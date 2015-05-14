@@ -11,6 +11,7 @@ Using your platform's package manager (e.g. apt-get or brew), install:
 
 - docker
 - docker-compose
+- docker-machine
 
 
 On Linux, alternatively install docker-compose with:
@@ -22,16 +23,12 @@ On Linux, alternatively install docker-compose with:
 
 If you are on a Mac, also install:
 
-- boot2docker
 - [VirtualBox](https://www.virtualbox.org/)
 
 ...upon which you need to run these commands:
 
-        boot2docker init
-        boot2docker start
-        eval "$(boot2docker shellinit)"
-        # and to test that it all works:
-        docker run hello-world
+    docker-machine create --driver virtualbox devenv
+    eval "$(docker-machine env devenv)" # add this line to your ~/.bash_profile
 
 ## 2. Clone this repo
 
@@ -48,14 +45,11 @@ Run bootstrap to pull dependencies
 
 ## 4. Start the apps 
 
-    ./docker.sh
+    # from dev-env directory
+    docker-compose build
+    docker-compose up --service-ports
 
-
-## 5. (optional) Set up environment for Docker
-
-If you want to run Docker commands, add the Docker environment variables to your profile:
-
-    boot2docker shellinit | grep "^export" >> ~/.bash_profile
+The ``` --service-ports``` flag mightn't be needed (i.e. on one Mac I tested with it wasn't, but on annother it was).
 
 # Local NGINX
 
