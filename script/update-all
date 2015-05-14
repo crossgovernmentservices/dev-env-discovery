@@ -12,8 +12,8 @@ for app in $apps; do
     if [ "${BRANCH/* /}" == "master" ]; then
         echo "Refreshing application ${app}"
         pushd ./apps/$_app
-        git pull origin master
-        git submodule update --init --recursive
+        git pull
+        git submodule foreach git pull origin master
         popd
     else
         echo
