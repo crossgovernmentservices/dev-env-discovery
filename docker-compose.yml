@@ -32,6 +32,8 @@ cgtprototypes:
 xgsprototypes:
   build: apps/xgs_prototypes
   command: python manage.py server
+  links:
+    - people
   environment:
     APPLICATION_ENV: dev
     PORT: 3003
