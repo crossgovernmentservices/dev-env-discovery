@@ -40,7 +40,7 @@ people:
   environment:
     APPLICATION_ENV: dev
     PORT: 3004
-    DATABASE_URI: "postgres://prototypes:prototypes@db:5432/prototypes"
+    DATABASE_URL: "postgres://prototypes:prototypes@db:5432/prototypes"
     TWILIO_ACCOUNT_ID: %TWILIO_ACCOUNT_ID%
     TWILIO_AUTH_TOKEN: %TWILIO_AUTH_TOKEN%
     TWILIO_PHONE_NUMBER: %TWILIO_PHONE_NUMBER%
