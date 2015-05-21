@@ -22,13 +22,6 @@ cgt:
     - apps/cgt:/code
   ports:
    - "3001:3001"
-cgtprototypes:
-  build: apps/cgt_prototypes
-  command: ./docker.sh 
-  volumes:
-    - apps/cgt_prototypes:/code
-  ports:
-   - "3002:3002"
 xgsprototypes:
   build: apps/xgs_prototypes
   command: python manage.py server
@@ -48,6 +41,9 @@ people:
     APPLICATION_ENV: dev
     PORT: 3004
     DATABASE_URI: "postgres://prototypes:prototypes@db:5432/prototypes"
+    TWILIO_ACCOUNT_ID: %TWILIO_ACCOUNT_ID%
+    TWILIO_AUTH_TOKEN: %TWILIO_AUTH_TOKEN%
+    TWILIO_PHONE_NUMBER: %TWILIO_PHONE_NUMBER%
   links:
     - db
   volumes:

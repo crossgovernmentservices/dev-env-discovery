@@ -43,13 +43,15 @@ Run bootstrap to pull dependencies
     cd dev-env
     ./script/bootstrap
 
+    # prepare docker-compose.yml
+    # This script depends on ~/.xgsenv - ask an admin for a copy
+    ./prep.sh
+
 ## 4. Start the apps 
 
     # from dev-env directory
     docker-compose build
-    docker-compose up --service-ports
-
-The ``` --service-ports``` flag mightn't be needed (i.e. on one Mac I tested with it wasn't, but on annother it was).
+    docker-compose up
 
 # Local NGINX
 
