@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -e
+
+APP=$1
+
+function show_usage() {
+  echo "Couldn't find containers/images matching [$APP]. Try one of:"
+  echo
+
+  apps=`cat config/apps`
+  for app in $apps; do
+    realname=$(echo "$app" | cut -d'/' -f2)
+    echo "devenv_$realname"
+  done
+}
+
+if [[ -z $APP ]] ; then
+  show_usage
+  exit 1
+fi
+
+export HASH=$(sudo docker ps -a|grep $APP|cut -f1 -d' ')
+export SERVICE=$(sudo docker ps -a|grep $APP|cut -f9 -d' ')
+
+if [[ -z $HASH ]] ; then
+  show_usage
+  exit 1
+else
+  while read -r CONTAINER; do
+    sudo docker stop $CONTAINER
+    sudo docker rm $CONTAINER
+  done <<< "$HASH"
+  sudo docker rmi $SERVICE
+  echo "Image $SERVICE and all related containers deleted."
+fi

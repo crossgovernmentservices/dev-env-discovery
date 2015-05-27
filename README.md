@@ -53,6 +53,14 @@ Run bootstrap to pull dependencies
     docker-compose build
     docker-compose up
 
+# Deleting an image
+
+This is especially useful when an app's' dependencies change and the image requires a rebuild.
+
+Run the script without arguments to see options, e.g.:
+
+    ./script/docker-delete
+
 # Local NGINX
 
 If you'd like to proxy the apps  behind a "nice" name like http://xgs.local instead of the usual http://localhost:3000
