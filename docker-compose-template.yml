@@ -30,7 +30,9 @@ xgsprototypes:
   environment:
     APPLICATION_ENV: dev
     PORT: 3003
-    HTTP_BASIC_AUTH_PASSWORD: %HTTP_BASIC_AUTH_PASSWORD%
+    BASIC_AUTH_PASSWORD: %BASIC_AUTH_PASSWORD%
+    BASIC_AUTH_USERNAME: %BASIC_AUTH_USERNAME%
+    BASIC_AUTH_FORCE: True
   volumes:
     - apps/xgs_prototypes:/code
   ports:
