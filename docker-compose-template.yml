@@ -32,7 +32,7 @@ xgsprototypes:
     PORT: 3003
     BASIC_AUTH_PASSWORD: %BASIC_AUTH_PASSWORD%
     BASIC_AUTH_USERNAME: %BASIC_AUTH_USERNAME%
-    BASIC_AUTH_FORCE: True
+    BASIC_AUTH_FORCE: %BASIC_AUTH_FORCE%
   volumes:
     - apps/xgs_prototypes:/code
   ports:
