@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+
+SCRIPT=$(basename $0)
+
+function connect() {
+  echo "password is: $2"
+  export HASH=$(sudo docker ps -a|grep "$1"|cut -f1 -d' ')
+  psql -h $(sudo docker inspect $HASH | jq -r '.[].NetworkSettings.IPAddress') $3 -p 5432 -U $4
+}
+
+if [[ "$SCRIPT" == "db" ]] ; then
+  echo "Don't run this script directly. Run one of:"
+  ls -1 $(dirname $0) | grep "^db-"
+  exit 1
+else
+  case "$SCRIPT" in
+    "db-prototype")
+      connect "devenv_db" "prototypes" "prototypes" "prototypes"
+      ;;
+    "db-maslow")
+      connect "devenv_postgres" "maslow" "maslow_development" "maslow"
+      ;;
+  esac
+fi
