@@ -14,7 +14,7 @@ def write_config(template, filename):
 
 def get_image(app):
     if bool(re.match('apps/\w+', app)):
-        return 'tutum.co/govuk/%s' % app.split('/')[1]
+        return "'tutum.co/govuk/xgs_%s'" % app.split('/')[1]
 
 
 def main():
