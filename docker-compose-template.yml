@@ -33,6 +33,7 @@ xgsprototypes:
     BASIC_AUTH_PASSWORD: %BASIC_AUTH_PASSWORD%
     BASIC_AUTH_USERNAME: %BASIC_AUTH_USERNAME%
     BASIC_AUTH_FORCE: %BASIC_AUTH_FORCE%
+    LOCATIONS_FRONTEND: locations.xgs.local
   volumes:
     - apps/xgs_prototypes:/code
   ports:
@@ -65,3 +66,19 @@ db:
     POSTGRES_PASSWORD: prototypes
     POSTGRES_USER: prototypes
     POSTGRES_DB_MAIN: prototypes
+locations:
+  build: apps/locations
+  environment:
+    - MODE=dev
+    - SETTINGS=config.DockerConfig
+    - PORT=8001
+    - SCHOOL_REGISTER=http://school.openregister.org
+    - ADDRESS_REGISTER=http://address.openregister.org
+    - POSTCODE_REGISTER=http://postcode.openregister.org
+    - POSTTOWN_REGISTER=http://post-town.openregister.org
+    - REGISTER_DOMAIN=openregister.org
+    - FRONTEND=prototypes.xgs.local
+  ports:
+    - "8001:8001"
+  volumes:
+    - apps/locations:/usr/src/app
