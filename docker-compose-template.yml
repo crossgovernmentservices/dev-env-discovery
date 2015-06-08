@@ -77,7 +77,6 @@ locations:
     - POSTCODE_REGISTER=http://postcode.openregister.org
     - POSTTOWN_REGISTER=http://post-town.openregister.org
     - REGISTER_DOMAIN=openregister.org
-    - FRONTEND=prototypes.xgs.local
   ports:
     - "8001:8001"
   volumes:
