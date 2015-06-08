@@ -22,8 +22,8 @@ cgt:
     - apps/cgt:/code
   ports:
    - "3001:3001"
-xgsprototypes:
-  build: apps/xgs_prototypes
+prototypes:
+  build: apps/prototypes
   command: python manage.py server
   links:
     - people
@@ -35,7 +35,7 @@ xgsprototypes:
     BASIC_AUTH_FORCE: %BASIC_AUTH_FORCE%
     LOCATIONS_FRONTEND: locations.xgs.local
   volumes:
-    - apps/xgs_prototypes:/code
+    - apps/prototypes:/code
   ports:
     - "3003:3003"
 people:
