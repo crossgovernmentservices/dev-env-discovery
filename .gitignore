@@ -1,2 +1,3 @@
 apps/
 docker-compose.yml
+aws.yml

@@ -15,11 +15,11 @@ postgres:
   environment:
     POSTGRES_PASSWORD: maslow
     POSTGRES_USER: maslow
-cgt:
-  build: apps/cgt
+home:
+  build: apps/home
   command: ./docker.sh 
   volumes:
-    - apps/cgt:/code
+    - apps/home:/code
   ports:
    - "3001:3001"
 prototypes:
@@ -30,9 +30,9 @@ prototypes:
   environment:
     APPLICATION_ENV: dev
     PORT: 3003
-    BASIC_AUTH_PASSWORD: %BASIC_AUTH_PASSWORD%
-    BASIC_AUTH_USERNAME: %BASIC_AUTH_USERNAME%
-    BASIC_AUTH_FORCE: %BASIC_AUTH_FORCE%
+    BASIC_AUTH_PASSWORD: __BASIC_AUTH_PASSWORD__
+    BASIC_AUTH_USERNAME: __BASIC_AUTH_USERNAME__
+    BASIC_AUTH_FORCE: __BASIC_AUTH_FORCE__
     LOCATIONS_FRONTEND: locations.xgs.local
   volumes:
     - apps/prototypes:/code
@@ -45,15 +45,15 @@ people:
     APPLICATION_ENV: dev
     PORT: 3004
     DATABASE_URL: "postgres://prototypes:prototypes@db:5432/prototypes"
-    TWILIO_ACCOUNT_ID: %TWILIO_ACCOUNT_ID%
-    TWILIO_AUTH_TOKEN: %TWILIO_AUTH_TOKEN%
-    TWILIO_PHONE_NUMBER: %TWILIO_PHONE_NUMBER%
-    MAIL_SERVER: %MAIL_SERVER%
-    MAIL_PORT: %MAIL_PORT%
-    MAIL_USERNAME: %MAIL_USERNAME%
-    MAIL_PASSWORD: %MAIL_PASSWORD%
-    MAIL_USE_TLS: %MAIL_USE_TLS%
-    MAIL_USE_SSL: %MAIL_USE_SSL%
+    TWILIO_ACCOUNT_ID: __TWILIO_ACCOUNT_ID__
+    TWILIO_AUTH_TOKEN: __TWILIO_AUTH_TOKEN__
+    TWILIO_PHONE_NUMBER: __TWILIO_PHONE_NUMBER__
+    MAIL_SERVER: __MAIL_SERVER__
+    MAIL_PORT: __MAIL_PORT__
+    MAIL_USERNAME: __MAIL_USERNAME__
+    MAIL_PASSWORD: __MAIL_PASSWORD__
+    MAIL_USE_TLS: __MAIL_USE_TLS__
+    MAIL_USE_SSL: __MAIL_USE_SSL__
   links:
     - db
   volumes:
