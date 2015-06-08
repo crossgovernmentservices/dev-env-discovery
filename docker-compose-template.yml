@@ -69,14 +69,14 @@ db:
 locations:
   build: apps/locations
   environment:
-    - MODE=dev
-    - SETTINGS=config.DockerConfig
-    - PORT=8001
-    - SCHOOL_REGISTER=http://school.openregister.org
-    - ADDRESS_REGISTER=http://address.openregister.org
-    - POSTCODE_REGISTER=http://postcode.openregister.org
-    - POSTTOWN_REGISTER=http://post-town.openregister.org
-    - REGISTER_DOMAIN=openregister.org
+    MODE: dev
+    SETTINGS: config.DockerConfig
+    PORT: 8001
+    SCHOOL_REGISTER: http://school.openregister.org
+    ADDRESS_REGISTER: http://address.openregister.org
+    POSTCODE_REGISTER: http://postcode.openregister.org
+    POSTTOWN_REGISTER: http://post-town.openregister.org
+    REGISTER_DOMAIN: openregister.org
   ports:
     - "8001:8001"
   volumes:

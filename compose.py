@@ -9,12 +9,12 @@ SECRETS='~/.xgsenv'
 
 def write_config(template, filename):
     f = open(filename, 'w')
-    yaml.dump(template, f)
+    yaml.dump(template, f, default_flow_style=False)
     f.close()
 
 def get_image(app):
     if bool(re.match('apps/\w+', app)):
-        return "'tutum.co/govuk/xgs_%s'" % app.split('/')[1]
+        return 'tutum.co/govuk/xgs_%s' % app.split('/')[1]
 
 
 def main():
@@ -52,6 +52,16 @@ def main():
                 if key == 'build':
                     del nested[key]
                     nested['image'] = get_image(val)
+                    template[app] = nested
+                    break
+            else:
+                continue
+
+        # remove 'volumes'
+        for app, nested in template.iteritems():
+            for key, val in nested.iteritems():
+                if key == 'volumes':
+                    del nested[key]
                     template[app] = nested
                     break
             else:
