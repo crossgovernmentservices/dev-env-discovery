@@ -71,7 +71,8 @@ def main():
         for app, nested in template.iteritems():
             for key, val in nested.iteritems():
                 nested['autorestart'] = 'always'
-                nested['autoredeploy'] = 'true'
+                if not app == 'db':
+                    nested['autoredeploy'] = True
                 template[app] = nested
                 break
             else:
