@@ -27,6 +27,7 @@ prototypes:
   command: python manage.py server
   links:
     - people
+    - locations
   environment:
     APPLICATION_ENV: dev
     PORT: 3003
