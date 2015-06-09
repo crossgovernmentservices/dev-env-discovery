@@ -67,6 +67,18 @@ def main():
             else:
                 continue
 
+        # add AWS-specific
+        for app, nested in template.iteritems():
+            for key, val in nested.iteritems():
+                nested['autorestart'] = 'always'
+                nested['autoredeploy'] = 'true'
+                template[app] = nested
+                break
+            else:
+                continue
+
+
+
         write_config(template, 'aws.yml')
 
 
