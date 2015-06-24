@@ -30,17 +30,17 @@ If you are on a Mac, also install:
     docker-machine create --driver virtualbox devenv
     eval "$(docker-machine env devenv)" # add this line to your ~/.bash_profile
 
-## 2. Clone this repo
+## 2. Clone this repo as 'xgs'
 
 **Mac users, note that you have to clone this somewhere in your home directory for the default /Users mount in Virtual Box to work.**
 
-    git clone git@github.com:crossgovernmentservices/dev-env.git
+    git clone git@github.com:crossgovernmentservices/dev-env.git xgs
 
 ## 3. Bootstrap
 
 Run bootstrap to pull dependencies
 
-    cd dev-env
+    cd xgs
     ./script/bootstrap
 
     # prepare docker-compose.yml
@@ -49,7 +49,7 @@ Run bootstrap to pull dependencies
 
 ## 4. Start the apps 
 
-    # from dev-env directory
+    # from xgs directory
     docker-compose build
     docker-compose up
 

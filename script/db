@@ -6,7 +6,9 @@ SCRIPT=$(basename $0)
 function connect() {
   echo "password is: $2"
   export HASH=$(sudo docker ps -a|grep "$1"|cut -f1 -d' ')
-  psql -h $(sudo docker inspect $HASH | jq -r '.[].NetworkSettings.IPAddress') $3 -p 5432 -U $4
+  HOST="$(sudo docker inspect $HASH | jq -r '.[].NetworkSettings.IPAddress')"
+  echo "postgresql://$4:$2@$HOST:5432/$3"
+  psql -h $HOST $3 -p 5432 -U $4
 }
 
 if [[ "$SCRIPT" == "db" ]] ; then
@@ -16,10 +18,10 @@ if [[ "$SCRIPT" == "db" ]] ; then
 else
   case "$SCRIPT" in
     "db-prototype")
-      connect "devenv_db" "prototypes" "prototypes" "prototypes"
+      connect "xgs_db" "prototypes" "prototypes" "prototypes"
       ;;
     "db-maslow")
-      connect "devenv_postgres" "maslow" "maslow_development" "maslow"
+      connect "xgs_postgres" "maslow" "maslow_development" "maslow"
       ;;
   esac
 fi
