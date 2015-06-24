@@ -62,7 +62,7 @@ people:
   ports:
     - "3004:3004"
 db:
-  image: postgres:9.4
+  build: apps/db
   environment:
     POSTGRES_PASSWORD: prototypes
     POSTGRES_USER: prototypes
