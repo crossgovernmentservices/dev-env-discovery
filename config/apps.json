@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "description": "This config is used by the bootstrap script to clone all apps into the working directory. This config is used by the docker-compose template generator to obtain configuration values."
+  },
+  "apps": [
+  {
+    "name": "prototypes",
+    "repo": "git@github.com:crossgovernmentservices/prototypes"
+  },
+  {
+    "name": "maslow",
+    "repo": "git@github.com:crossgovernmentservices/maslow-standalone"
+  },
+  {
+    "name": "home",
+    "repo": "git@github.com:crossgovernmentservices/home",
+    "subdomain": "www"
+  },
+  {
+    "name": "people",
+    "repo": "git@github.com:crossgovernmentservices/people"
+  },
+  {
+    "name": "locations",
+    "repo": "git@github.com:crossgovernmentservices/locations"
+  },
+  {
+    "name": "db",
+    "repo": "git@github.com:crossgovernmentservices/db"
+  },
+  {
+    "name": "proxy"
+  }
+  ]
+}

@@ -1,9 +1,38 @@
-#!/bin/bash
+#!/usr/bin/env python
 
-set -e
+import json
+import subprocess
+import os
 
-apps=`cat config/apps`
 
+CONF='config/apps.json'
+
+with open(CONF) as data_file:    
+    conf = json.load(data_file)
+    apps = conf['apps']
+    for app in apps:
+        name = app['name']
+        if 'repo' not in app:
+            print('Skipping %s' % name)
+            continue
+        repo = app['repo']
+
+        # remember our original working directory
+        pwd = os.getcwd()
+
+        # check if app was cloned before
+        rel = 'apps/%s' % name
+        if os.path.exists(rel):
+            print('%s already cloned. TODO fetch latest...' % name)
+        else:
+            # actually, no need to change working directory, since
+            # Git can just clone to the right place for us.
+            # os.chdir(os.path.join(os.path.abspath(sys.path[0]), rel))
+
+            subprocess.call(['git', 'clone','--recursive', repo, rel])
+
+
+comment = """
 for app in $apps; do
   _app=$(basename $app)
   if [[ ! -d ./apps/$_app ]] ; then
@@ -13,3 +42,4 @@ for app in $apps; do
     echo "Not updating local copy of ${app}"
   fi
 done
+"""

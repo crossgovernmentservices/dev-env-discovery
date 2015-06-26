@@ -1,8 +1,8 @@
 maslow:
-  build: apps/maslow-standalone
+  build: apps/maslow
   command: ./docker.sh 
   volumes:
-    - apps/maslow-standalone:/code
+    - apps/maslow:/code
   links:
     - postgres
   ports:
@@ -22,6 +22,8 @@ home:
     - apps/home:/code
   ports:
    - "3001:3001"
+  environment:
+    VIRTUAL_HOST: __URL_HOME__
 prototypes:
   build: apps/prototypes
   command: python manage.py server
@@ -35,6 +37,7 @@ prototypes:
     BASIC_AUTH_USERNAME: __BASIC_AUTH_USERNAME__
     BASIC_AUTH_FORCE: __BASIC_AUTH_FORCE__
     LOCATIONS_FRONTEND: locations.xgs.local
+    VIRTUAL_HOST: __URL_PROTOTYPES__
   volumes:
     - apps/prototypes:/code
   ports:
@@ -55,6 +58,7 @@ people:
     MAIL_PASSWORD: __MAIL_PASSWORD__
     MAIL_USE_TLS: __MAIL_USE_TLS__
     MAIL_USE_SSL: __MAIL_USE_SSL__
+    VIRTUAL_HOST: __URL_PEOPLE__
   links:
     - db
   volumes:
@@ -78,7 +82,21 @@ locations:
     POSTCODE_REGISTER: http://postcode.openregister.org
     POSTTOWN_REGISTER: http://post-town.openregister.org
     REGISTER_DOMAIN: openregister.org
+    VIRTUAL_HOST: __URL_LOCATIONS__
   ports:
     - "8001:8001"
   volumes:
     - apps/locations:/usr/src/app
+proxy:
+  build: proxy
+  ports:
+    - "80:80"
+  environment:
+    DEFAULT_HOST: __URL_PROXY__
+  links:
+    - prototypes
+    - home
+    - people
+    - locations
+  volumes:
+    - proxy:/code

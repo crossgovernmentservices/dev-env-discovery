@@ -1,6 +1,25 @@
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
+**Table of Contents**
+
+- [Intro](#intro)
+- [Steps](#steps)
+    - [Install dependencies](#install-dependencies)
+        - [Mac](#mac)
+    - [2. Clone this repo as 'xgs'](#2-clone-this-repo-as-xgs)
+    - [3. Bootstrap](#3-bootstrap)
+    - [4. Start the apps](#4-start-the-apps)
+- [Deleting an image](#deleting-an-image)
+- [Local NGINX](#local-nginx)
+- [App links](#app-links)
+
+<!-- markdown-toc end -->
 # Intro
 
 This development environment eliminates the need for more than one dependency (e.g. PostgresQL, RVM, Ruby, etc) and leaves you with a single dependency to run all the XGS apps: Docker.
+
+Also, scripts in this repo generally depend on **Python**, and Mac/\*nix should have  it installed.
+
+```xgs``` is an abbreviation of Cross Government Services, although the domain name used for it is ```cstools```, which is Civil Service Tools. Naming things are difficult.
 
 # Steps
 
@@ -45,7 +64,7 @@ Run bootstrap to pull dependencies
 
     # prepare docker-compose.yml
     # This script depends on ~/.xgsenv - ask an admin for a copy
-    ./prep.sh
+    ./script/compose
 
 ## 4. Start the apps 
 
@@ -53,7 +72,7 @@ Run bootstrap to pull dependencies
     docker-compose build
     docker-compose up
 
-# Deleting an image
+# Deleting an image and its containers
 
 This is especially useful when an app's' dependencies change and the image requires a rebuild.
 
@@ -61,29 +80,10 @@ Run the script without arguments to see options, e.g.:
 
     ./script/docker-delete
 
-# Local NGINX
+# NGINX proxy
 
-If you'd like to proxy the apps  behind a "nice" name like http://xgs.local instead of the usual http://localhost:3000
+The development environment comes an nginx proxy built-in listening on port 80.
 
-1. Copy the server definition to your NGINX install, typically:
+Add the snippet in [hosts](./hosts) to ```/etc/hosts```, and then go to any of those URLs in your web browser (provided the dev env is up).
 
-    ```
-    sudo cp nginx.conf /etc/nginx/sites-available/xgs.local
-    sudo ln -s /etc/nginx/sites-available/xgs.local \
-               /etc/nginx/sites-enabled/xgs.local
-    ```
-2. Restart NGINX
-
-    ```
-    sudo service nginx restart
-    ```
-
-3. Add the snippet in [hosts](./hosts) to ```/etc/hosts```.
-
-# App links 
-
-| App | URL | without NGINX proxy |
-| --- | --- | ------------------- |
-| Maslow | http://maslow.xgs.local | http://localhost:3000 |
-| Cross Government Services | http://xgs.local|http://localhost:3001 |
-| Cross Government Services Prototypes | http://prototypes.xgs.local | http://localhost:3002 |
+(TODO not tested on Mac)
