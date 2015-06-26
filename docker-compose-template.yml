@@ -93,6 +93,7 @@ proxy:
     - "80:80"
   environment:
     DEFAULT_HOST: __URL_PROXY__
+    TUTUM_HACK: "prototypes home people locations"
   links:
     - prototypes
     - home

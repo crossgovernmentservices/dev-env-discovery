@@ -2,27 +2,20 @@
 # Assumptions:
 # one instance per server
 
-echo "running configuration..."
+echo "Running configuration..."
 
 TMPCONF=$(mktemp -t "proxy.XXXXXX")
 cp nginx.conf $TMPCONF
 
 # Get the linked app names.
 # Assumes names without _ in them.
-function xxx {
-    IFS=$'\n'
-    IPS_AND_APPS=($(egrep -v "::|127.0.0.1|_" /etc/hosts))
-
-    for X in "${IPS_AND_APPS[@]}"; do
-        NAME=$(echo $X|cut -d' ' -f5)
-        echo "name $X"
-    done
-}
 function apps {
     DEFAULT_HOST=$(printenv|grep DEFAULT_HOST| cut -d'=' -f2)
-    IFS=$'\n'
-    APPS=($(cat /etc/hosts | egrep -v "::|127.0.0.1|_" | cut -d$'\t' -f2))
+    IFS=' '
+    APPS=($TUTUM_HACK)
+    #APPS=($(cat /etc/hosts | egrep -v "::|127.0.0.1|_" | cut -d$'\t' -f2))
     for APP in "${APPS[@]}"; do
+        echo "Configuring app: $APP"
         # get IP:PORT from env vars using app names
         # ignore docker-compose prefixes, e.g. XGS_
         IP_PORT=$(printenv | grep -i "${APP}_PORT" | egrep -v "XGS_" | grep "_TCP=" | cut -d'/' -f3)
@@ -55,7 +48,8 @@ EOF
 }
 
 apps
-
+echo "Writing config..."
 #cp $TMPCONF /etc/nginx/nginx.conf
 cp $TMPCONF /etc/nginx/conf.d/default.conf
 rm $TMPCONF
+echo "Done."
