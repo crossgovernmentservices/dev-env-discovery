@@ -2,7 +2,7 @@
 
 set -e
 
-apps=`cat config/apps`
+apps=`cat config/apps.json |jq -r '.apps[].name'`
 
 for app in $apps; do
     _app=$(basename $app)
