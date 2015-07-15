@@ -24,6 +24,8 @@ home:
    - "3001:3001"
   environment:
     VIRTUAL_HOST: __URL_HOME__
+    BASIC_AUTH_PASSWORD: __BASIC_AUTH_PASSWORD__
+    BASIC_AUTH_USERNAME: __BASIC_AUTH_USERNAME__
 prototypes:
   build: apps/prototypes
   command: python manage.py server
