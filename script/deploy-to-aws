@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+ 
+# The below is basically anything non-Maslow related, i.e.:
+# grep "^[a-z]" docker-compose-template.yml|egrep -v "maslow|postgres"
+for IMAGE in xgs_proxy xgs_db xgs_prototypes xgs_locations xgs_people xgs_home ; do
+  tutum image push $IMAGE:latest
+done

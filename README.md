@@ -8,11 +8,13 @@
     - [2. Clone this repo as 'xgs'](#2-clone-this-repo-as-xgs)
     - [3. Bootstrap](#3-bootstrap)
     - [4. Start the apps](#4-start-the-apps)
-- [Deleting an image](#deleting-an-image)
-- [Local NGINX](#local-nginx)
-- [App links](#app-links)
+- [Deleting an image and its containers](#deleting-an-image-and-its-containers)
+- [NGINX proxy](#nginx-proxy)
+- [Deploy to AWS](#deploy-to-aws)
 
 <!-- markdown-toc end -->
+
+
 # Intro
 
 This development environment eliminates the need for more than one dependency (e.g. PostgresQL, RVM, Ruby, etc) and leaves you with a single dependency to run all the XGS apps: Docker.
@@ -66,7 +68,7 @@ Run bootstrap to pull dependencies
     # This script depends on ~/.xgsenv - ask an admin for a copy
     ./script/compose
 
-## 4. Start the apps 
+## 4. Start the apps
 
     # from xgs directory
     docker-compose build
@@ -87,3 +89,16 @@ The development environment comes an nginx proxy built-in listening on port 80.
 Add the snippet in [hosts](./hosts) to ```/etc/hosts```, and then go to any of those URLs in your web browser (provided the dev env is up).
 
 (TODO not tested on Mac)
+
+# Deploy to AWS
+
+Currently, deploying to production can only be done from a development machine:
+
+    ./script/deploy-to-aws
+
+It pushes the Docker images that ```docker-compose``` built during development, but to be sure that you're deploying the latest code, rebuild all images with this command beforehand:
+
+    docker-compose build
+
+
+Tutum is configured to auto-deploy all services when new Docker images are pushed.

@@ -23,7 +23,7 @@ with open(CONF) as data_file:
         # check if app was cloned before
         rel = 'apps/%s' % name
         if os.path.exists(rel):
-            print('%s already cloned. TODO fetch latest...' % name)
+            print('%s already cloned. Fetch latest with ./script/update-all' % name)
         else:
             # actually, no need to change working directory, since
             # Git can just clone to the right place for us.
