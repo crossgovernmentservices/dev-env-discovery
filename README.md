@@ -92,6 +92,8 @@ Add the snippet in [hosts](./hosts) to ```/etc/hosts```, and then go to any of t
 
 # Deploy to AWS
 
+**Dependency**: the [Tutum CLI](https://github.com/tutumcloud/cli), which you can install with ```pip install tutum```.
+
 Currently, deploying to production can only be done from a development machine:
 
     ./script/deploy-to-aws
