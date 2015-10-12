@@ -64,6 +64,9 @@ Run bootstrap to pull dependencies
     cd xgs
     ./script/bootstrap
 
+    # install needed python libraries
+    pip install -r requirements.txt
+
     # prepare docker-compose.yml
     # This script depends on ~/.xgsenv - ask an admin for a copy
     ./script/compose
